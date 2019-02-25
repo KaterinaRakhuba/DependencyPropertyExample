@@ -1,0 +1,91 @@
+﻿<Window x:Class="DependencyPropertyExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:newTestControls="clr-namespace:DependencyPropertyExample">
+    <Window.Resources>
+        <newTestControls:BoolToVisibilityConverter x:Key="converter"></newTestControls:BoolToVisibilityConverter>
+        <newTestControls:DoubleToShiftedDoubleConverter x:Key="dtsdConverter"></newTestControls:DoubleToShiftedDoubleConverter>
+    </Window.Resources>
+    <Grid Name="RootGrid">
+        <newTestControls:NewTestControl
+            x:Name="newTestControl1"
+            testData="{Binding ElementName=slider1, Path=Value}">
+        </newTestControls:NewTestControl>
+        <CheckBox
+            x:Name="rectangleCheckBox"
+            Margin="15"
+            Content="Rectagle On/Off"
+            ></CheckBox>
+        <Button Name="button1"
+                Content="Show value"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                Padding="5"
+                VerticalAlignment="Center"
+                Click="button1_Click"/>
+        <Slider 
+                Minimum="0"
+                Maximum="100"
+                Value="0"
+                TickFrequency="0.01"
+                IsSnapToTickEnabled="True"
+                Name="slider1"
+                Height="27"
+                HorizontalAlignment="Center"
+                Margin="0,50,0,0"
+                VerticalAlignment="Top"
+                Width="437"/>
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <TextBlock
+                Name="textBlock1"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                Margin="0,80,0,0"
+                Padding="10"
+                TextWrapping="Wrap"
+                Text="0"
+                VerticalAlignment="Top"/>
+            <TextBlock
+                Name="textBlock2"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                Margin="0,80,0,0"
+                Padding="10"
+                TextWrapping="Wrap"
+                Text="{Binding ElementName=slider1, Path=Value}"
+                VerticalAlignment="Top"/>
+        </StackPanel>
+        <!--multibinding-->
+        <Rectangle
+            Name="rectangle1"
+            Width="450"
+            Height="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0,200,0,0"
+            Visibility="{Binding ElementName=rectangleCheckBox, Path=IsChecked, Converter={StaticResource converter}}">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5" >
+                    <!--GradientStop Color="Chocolate" Offset="{Binding ElementName=slider1, Path=Value}"></GradientStop-->
+                    <GradientStop Color="Red" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Red}}" ></GradientStop>
+                    <GradientStop Color="Orange" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Orange}}"></GradientStop>
+                    <GradientStop Color="Yellow" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Yellow}}"></GradientStop>
+                    <GradientStop Color="LightGreen" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.LightGreen}}"></GradientStop>
+                    <GradientStop Color="LightBlue" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.LightBlue}}"></GradientStop>
+                    <GradientStop Color="Blue" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Blue}}"></GradientStop>
+                    <GradientStop Color="Violet" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Violet}}"></GradientStop>
+                    <GradientStop Color="Red" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Red0}}" ></GradientStop>
+                    <GradientStop Color="Orange" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Orange0}}"></GradientStop>
+                    <GradientStop Color="Yellow" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Yellow0}}"></GradientStop>
+                    <GradientStop Color="LightGreen" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.LightGreen0}}"></GradientStop>
+                    <GradientStop Color="LightBlue" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.LightBlue0}}"></GradientStop>
+                    <GradientStop Color="Blue" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Blue0}}"></GradientStop>
+                    <GradientStop Color="Violet" Offset="{Binding ElementName=slider1, Path=Value, Converter={StaticResource dtsdConverter}, ConverterParameter={x:Static newTestControls:ColorShifts.Violet0}}"></GradientStop>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+</Window>
